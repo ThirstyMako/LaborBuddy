@@ -1,5 +1,7 @@
 package com.example.jason.laborbuddy;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -79,7 +81,20 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.delete:
-                deleteAll();
+
+                //Ask user if they are sure they want to delete.
+                new AlertDialog.Builder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure?")
+                        .setMessage("Clicking \"Yes\" will delete all contractions")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteAll();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
                 return true;
 
             default:
